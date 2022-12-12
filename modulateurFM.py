@@ -21,7 +21,6 @@ if __name__ == '__main__':
             print("Warning: failed to XInitThreads()")
 
 from gnuradio import analog
-from gnuradio import audio
 from gnuradio import blocks
 from gnuradio import gr
 from gnuradio.filter import firdes
@@ -31,6 +30,8 @@ from PyQt5 import Qt
 from argparse import ArgumentParser
 from gnuradio.eng_arg import eng_float, intx
 from gnuradio import eng_notation
+from gnuradio import uhd
+import time
 from gnuradio import qtgui
 
 class modulateurFM(gr.top_block, Qt.QWidget):
@@ -69,35 +70,42 @@ class modulateurFM(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.samp_rate = samp_rate = 44100
+        self.samp_rate = samp_rate = 44100*10
+        self.fc = fc = 433e6
 
         ##################################################
         # Blocks
         ##################################################
+        self.uhd_usrp_sink_0 = uhd.usrp_sink(
+            ",".join(("", "")),
+            uhd.stream_args(
+                cpu_format="fc32",
+                args='',
+                channels=list(range(0,1)),
+            ),
+            '',
+        )
+        self.uhd_usrp_sink_0.set_center_freq(fc, 0)
+        self.uhd_usrp_sink_0.set_gain(80, 0)
+        self.uhd_usrp_sink_0.set_antenna('TX/RX', 0)
+        self.uhd_usrp_sink_0.set_samp_rate(samp_rate)
+        self.uhd_usrp_sink_0.set_time_unknown_pps(uhd.time_spec())
         self.blocks_wavfile_source_0 = blocks.wavfile_source('/home/rmoulin/Téléchargements/Another Day of Sun - La La Land (Original Motion Picture Soundtrack).wav', True)
-        self.audio_sink_0 = audio.sink(samp_rate, '', True)
-        self.analog_nbfm_tx_0 = analog.nbfm_tx(
+        self.analog_wfm_tx_0 = analog.wfm_tx(
         	audio_rate=44100,
         	quad_rate=samp_rate,
         	tau=75e-6,
-        	max_dev=5e3,
+        	max_dev=75e3,
         	fh=-1.0,
-                )
-        self.analog_nbfm_rx_0 = analog.nbfm_rx(
-        	audio_rate=44100,
-        	quad_rate=samp_rate,
-        	tau=75e-6,
-        	max_dev=5e3,
-          )
+        )
 
 
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.analog_nbfm_rx_0, 0), (self.audio_sink_0, 0))
-        self.connect((self.analog_nbfm_tx_0, 0), (self.analog_nbfm_rx_0, 0))
-        self.connect((self.blocks_wavfile_source_0, 0), (self.analog_nbfm_tx_0, 0))
+        self.connect((self.analog_wfm_tx_0, 0), (self.uhd_usrp_sink_0, 0))
+        self.connect((self.blocks_wavfile_source_0, 0), (self.analog_wfm_tx_0, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "modulateurFM")
@@ -109,6 +117,14 @@ class modulateurFM(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
+        self.uhd_usrp_sink_0.set_samp_rate(self.samp_rate)
+
+    def get_fc(self):
+        return self.fc
+
+    def set_fc(self, fc):
+        self.fc = fc
+        self.uhd_usrp_sink_0.set_center_freq(self.fc, 0)
 
 
 
