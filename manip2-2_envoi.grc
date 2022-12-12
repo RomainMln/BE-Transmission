@@ -131,23 +131,6 @@ blocks:
     coordinate: [184, 12]
     rotation: 0
     state: enabled
-- name: analog_const_source_x_0
-  id: analog_const_source_x
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    const: '1'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: float
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [565, 513]
-    rotation: 0
-    state: true
 - name: analog_sig_source_x_0
   id: analog_sig_source_x
   parameters:
@@ -226,6 +209,73 @@ blocks:
     coordinate: [1635, 390]
     rotation: 0
     state: disabled
+- name: audio_sink_0_0_0_0
+  id: audio_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    device_name: ''
+    num_inputs: '1'
+    ok_to_block: 'True'
+    samp_rate: '44100'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1571, 736]
+    rotation: 0
+    state: disabled
+- name: audio_sink_0_0_0_0_0
+  id: audio_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    device_name: ''
+    num_inputs: '1'
+    ok_to_block: 'True'
+    samp_rate: '44100'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1713, 478]
+    rotation: 0
+    state: disabled
+- name: audio_sink_0_0_0_0_0_0
+  id: audio_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    device_name: ''
+    num_inputs: '1'
+    ok_to_block: 'True'
+    samp_rate: '44100'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1675, 576]
+    rotation: 0
+    state: disabled
+- name: blocks_complex_to_float_0
+  id: blocks_complex_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1221, 473]
+    rotation: 0
+    state: disabled
 - name: blocks_complex_to_mag_0
   id: blocks_complex_to_mag
   parameters:
@@ -242,6 +292,25 @@ blocks:
     coordinate: [1148, 229]
     rotation: 0
     state: disabled
+- name: blocks_delay_0
+  id: blocks_delay
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: '100'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [674, 514]
+    rotation: 0
+    state: bypassed
 - name: blocks_float_to_complex_0
   id: blocks_float_to_complex
   parameters:
@@ -280,7 +349,8 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    file: "/home/rmoulin/T\xE9l\xE9chargements/RT.wav"
+    file: "/home/rmoulin/T\xE9l\xE9chargements/C\xE9line Dion - Pour que tu maimes\
+      \ encore (Clip officiel).wav"
     maxoutbuf: '0'
     minoutbuf: '0'
     nchan: '1'
@@ -292,6 +362,25 @@ blocks:
     coordinate: [500, 439]
     rotation: 0
     state: enabled
+- name: blocks_wavfile_source_0_0
+  id: blocks_wavfile_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    file: "/home/rmoulin/T\xE9l\xE9chargements/a-ha - Take On Me (Official Video)\
+      \ [Remastered in 4K].wav"
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nchan: '1'
+    repeat: 'True'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1289, 719]
+    rotation: 0
+    state: disabled
 - name: dc_blocker_xx_0
   id: dc_blocker_xx
   parameters:
@@ -372,6 +461,66 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [1639, 243]
+    rotation: 0
+    state: disabled
+- name: rational_resampler_xxx_0_0_0_0
+  id: rational_resampler_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: '44100'
+    fbw: '0'
+    interp: samp_rate
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    taps: ''
+    type: ccc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1022, 384]
+    rotation: 0
+    state: enabled
+- name: rational_resampler_xxx_0_0_0_1
+  id: rational_resampler_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: samp_rate
+    fbw: '0'
+    interp: '44100'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    taps: ''
+    type: fff
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1471, 458]
+    rotation: 0
+    state: disabled
+- name: rational_resampler_xxx_0_0_0_1_0
+  id: rational_resampler_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: samp_rate
+    fbw: '0'
+    interp: '44100'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    taps: ''
+    type: fff
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1439, 562]
     rotation: 0
     state: disabled
 - name: uhd_usrp_sink_0
@@ -923,7 +1072,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1025, 387]
+    coordinate: [1275, 311]
     rotation: 0
     state: enabled
 - name: uhd_usrp_source_0
@@ -1299,17 +1448,25 @@ blocks:
     state: disabled
 
 connections:
-- [analog_const_source_x_0, '0', blocks_float_to_complex_0_0, '1']
 - [analog_sig_source_x_0, '0', rational_resampler_xxx_0, '0']
 - [analog_sig_source_x_0_0, '0', blocks_float_to_complex_0, '0']
+- [blocks_complex_to_float_0, '0', rational_resampler_xxx_0_0_0_1, '0']
+- [blocks_complex_to_float_0, '1', rational_resampler_xxx_0_0_0_1_0, '0']
 - [blocks_complex_to_mag_0, '0', low_pass_filter_0, '0']
+- [blocks_delay_0, '0', blocks_float_to_complex_0_0, '1']
 - [blocks_float_to_complex_0, '0', uhd_usrp_sink_0, '0']
-- [blocks_float_to_complex_0_0, '0', uhd_usrp_sink_0_0, '0']
+- [blocks_float_to_complex_0_0, '0', rational_resampler_xxx_0_0_0_0, '0']
+- [blocks_wavfile_source_0, '0', blocks_delay_0, '0']
 - [blocks_wavfile_source_0, '0', blocks_float_to_complex_0_0, '0']
+- [blocks_wavfile_source_0_0, '0', audio_sink_0_0_0_0, '0']
 - [dc_blocker_xx_0, '0', rational_resampler_xxx_0_0_0, '0']
 - [low_pass_filter_0, '0', dc_blocker_xx_0, '0']
 - [rational_resampler_xxx_0, '0', audio_sink_0, '0']
 - [rational_resampler_xxx_0_0_0, '0', audio_sink_0_0_0, '0']
+- [rational_resampler_xxx_0_0_0_0, '0', blocks_complex_to_float_0, '0']
+- [rational_resampler_xxx_0_0_0_0, '0', uhd_usrp_sink_0_0, '0']
+- [rational_resampler_xxx_0_0_0_1, '0', audio_sink_0_0_0_0_0, '0']
+- [rational_resampler_xxx_0_0_0_1_0, '0', audio_sink_0_0_0_0_0_0, '0']
 - [uhd_usrp_source_0, '0', blocks_complex_to_mag_0, '0']
 
 metadata:
