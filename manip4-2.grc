@@ -36,7 +36,7 @@ blocks:
   id: variable_constellation
   parameters:
     comment: ''
-    const_points: '[-1,1]'
+    const_points: '[0,1]'
     dims: '1'
     precision: '8'
     rot_sym: '4'
@@ -271,7 +271,7 @@ blocks:
     bus_structure: null
     coordinate: [716, 414]
     rotation: 0
-    state: true
+    state: disabled
 - name: rational_resampler_xxx_0
   id: rational_resampler_xxx
   parameters:
