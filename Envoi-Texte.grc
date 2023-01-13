@@ -81,7 +81,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [62, 325]
+    coordinate: [35, 403]
     rotation: 0
     state: true
 - name: blocks_stream_to_tagged_stream_0
@@ -102,7 +102,7 @@ blocks:
     bus_structure: null
     coordinate: [307, 481]
     rotation: 0
-    state: bypassed
+    state: enabled
 - name: blocks_tag_gate_0
   id: blocks_tag_gate
   parameters:
@@ -121,7 +121,7 @@ blocks:
     bus_structure: null
     coordinate: [400, 362]
     rotation: 0
-    state: bypassed
+    state: enabled
 - name: blocks_throttle_0
   id: blocks_throttle
   parameters:
@@ -146,7 +146,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    bits_per_chunk: '1'
+    bits_per_chunk: '2'
     comment: ''
     endianness: gr.GR_MSB_FIRST
     maxoutbuf: '0'
@@ -159,14 +159,59 @@ blocks:
     bus_structure: null
     coordinate: [958, 162]
     rotation: 0
-    state: enabled
+    state: bypassed
+- name: blocks_unpacked_to_packed_xx_1
+  id: blocks_unpacked_to_packed_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    bits_per_chunk: '4'
+    comment: ''
+    endianness: gr.GR_MSB_FIRST
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [119, 210]
+    rotation: 0
+    state: bypassed
+- name: digital_header_payload_demux_0
+  id: digital_header_payload_demux
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    guard_interval: '0'
+    header_len: '32'
+    header_padding: '0'
+    items_per_symbol: '1'
+    length_tag_key: '"packet_len"'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    output_symbols: 'False'
+    samp_rate: samp_rate
+    special_tags: '"packet_len"'
+    timing_tag_key: '"rx_time"'
+    trigger_tag_key: '"packet_len"'
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [983, 422]
+    rotation: 0
+    state: true
 - name: digital_packet_headergenerator_bb_0
   id: digital_packet_headergenerator_bb
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    header_formatter: ''
+    header_formatter: '1'
     len_tag_key: '"packet_len"'
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -174,32 +219,32 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [764, 380]
+    coordinate: [656, 422]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: digital_packet_headerparser_b_0
   id: digital_packet_headerparser_b
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    header_formatter: ''
+    header_formatter: '1'
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1065, 467]
+    coordinate: [1053, 629]
     rotation: 0
-    state: disabled
+    state: true
 - name: digital_psk_demod_0
   id: digital_psk_demod
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    constellation_points: '2'
+    constellation_points: '4'
     differential: 'True'
     excess_bw: '0.35'
     freq_bw: 6.28/100.0
@@ -224,7 +269,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    constellation_points: '2'
+    constellation_points: '4'
     differential: 'True'
     excess_bw: '0.35'
     log: 'False'
@@ -243,12 +288,16 @@ blocks:
 
 connections:
 - [blocks_file_source_0, '0', blocks_stream_to_tagged_stream_0, '0']
+- [blocks_file_source_0, '0', blocks_unpacked_to_packed_xx_1, '0']
 - [blocks_stream_to_tagged_stream_0, '0', blocks_tag_gate_0, '0']
 - [blocks_tag_gate_0, '0', digital_packet_headergenerator_bb_0, '0']
-- [blocks_tag_gate_0, '0', digital_psk_mod_0, '0']
-- [blocks_throttle_0, '0', blocks_file_sink_0, '0']
 - [blocks_unpacked_to_packed_xx_0, '0', blocks_throttle_0, '0']
+- [digital_header_payload_demux_0, '0', digital_packet_headerparser_b_0, '0']
+- [digital_header_payload_demux_0, '1', blocks_file_sink_0, '0']
+- [digital_packet_headergenerator_bb_0, '0', digital_psk_mod_0, '0']
+- [digital_packet_headerparser_b_0, header_data, digital_header_payload_demux_0, header_data]
 - [digital_psk_demod_0, '0', blocks_unpacked_to_packed_xx_0, '0']
+- [digital_psk_demod_0, '0', digital_header_payload_demux_0, '0']
 - [digital_psk_mod_0, '0', digital_psk_demod_0, '0']
 
 metadata:

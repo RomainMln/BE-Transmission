@@ -1,0 +1,8 @@
+#!/bin/bash
+
+
+f=`cat shift.txt`
+
+echo $hex
+tail -c +7 fichier-recu.txt  > shift.txt
+

@@ -44,7 +44,7 @@ blocks:
     start: 90e6
     step: 100e3
     stop: 110e6
-    value: '92600000'
+    value: '103100000'
     widget: counter_slider
   states:
     bus_sink: false
@@ -111,8 +111,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    file: "/home/rmoulin/T\xE9l\xE9chargements/Another Day of Sun - La La Land (Original\
-      \ Motion Picture Soundtrack).wav"
+    file: "/home/rmoulin/T\xE9l\xE9chargements/Rick-Astley-Never-Gonna-Give-You-Up-_Official-Music-Video_.wav"
     maxoutbuf: '0'
     minoutbuf: '0'
     nchan: '1'
