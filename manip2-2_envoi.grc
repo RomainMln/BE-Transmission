@@ -62,7 +62,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [318, 37]
+    coordinate: [279, 4]
     rotation: 0
     state: true
 - name: fcfiltre
@@ -74,7 +74,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [212, 153]
+    coordinate: [211, 153]
     rotation: 0
     state: true
 - name: freq_signal

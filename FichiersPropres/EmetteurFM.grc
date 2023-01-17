@@ -10,7 +10,7 @@ options:
     gen_linking: dynamic
     generate_options: qt_gui
     hier_block_src_path: '.:'
-    id: RadioPirate
+    id: modulateurFM
     max_nouts: '0'
     output_language: python
     placement: (0,0)
@@ -33,31 +33,22 @@ options:
 
 blocks:
 - name: fc
-  id: variable_qtgui_range
+  id: variable
   parameters:
     comment: ''
-    gui_hint: ''
-    label: ''
-    min_len: '200'
-    orient: Qt.Horizontal
-    rangeType: float
-    start: 90e6
-    step: 100e3
-    stop: 110e6
-    value: '103100000'
-    widget: counter_slider
+    value: 433e6
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [288, 5]
+    coordinate: [307, 12]
     rotation: 0
     state: true
 - name: samp_rate
   id: variable
   parameters:
     comment: ''
-    value: 10*44100
+    value: 44100*10
   states:
     bus_sink: false
     bus_source: false
@@ -82,7 +73,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [266, 145]
+    coordinate: [282, 160]
     rotation: 0
     state: true
 - name: blocks_wavfile_source_0
@@ -91,7 +82,8 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    file: "/home/rmoulin/T\xE9l\xE9chargements/Rick-Astley-Never-Gonna-Give-You-Up-_Official-Music-Video_.wav"
+    file: "/home/rmoulin/T\xE9l\xE9chargements/Another Day of Sun - La La Land (Original\
+      \ Motion Picture Soundtrack).wav"
     maxoutbuf: '0'
     minoutbuf: '0'
     nchan: '1'
@@ -100,7 +92,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 169]
+    coordinate: [27, 185]
     rotation: 0
     state: true
 - name: uhd_usrp_sink_0
@@ -376,7 +368,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [611, 121]
+    coordinate: [629, 136]
     rotation: 0
     state: enabled
 

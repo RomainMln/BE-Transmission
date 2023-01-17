@@ -10,7 +10,7 @@ options:
     gen_linking: dynamic
     generate_options: qt_gui
     hier_block_src_path: '.:'
-    id: demodFM
+    id: "R\xE9cepteurAM"
     max_nouts: '0'
     output_language: python
     placement: (0,0)
@@ -27,45 +27,24 @@ options:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 8]
+    coordinate: [7, 8]
     rotation: 0
     state: enabled
 
 blocks:
-- name: center_freq_mod
-  id: variable_qtgui_range
-  parameters:
-    comment: ''
-    gui_hint: ''
-    label: ''
-    min_len: '200'
-    orient: Qt.Horizontal
-    rangeType: float
-    start: 87.5e6
-    step: 100e3
-    stop: 108e6
-    value: 92.6e6
-    widget: counter_slider
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [307, 49]
-    rotation: 0
-    state: true
 - name: fc
   id: variable
   parameters:
     comment: ''
-    value: 433e6
+    value: 862e6
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [169, 168]
+    coordinate: [277, 13]
     rotation: 0
-    state: enabled
-- name: fc_filtre
+    state: true
+- name: fcfiltre
   id: variable
   parameters:
     comment: ''
@@ -74,58 +53,43 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [372, 174]
+    coordinate: [525, 9]
     rotation: 0
-    state: enabled
+    state: true
+- name: gain
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: ''
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: '1'
+    step: '1'
+    stop: '100'
+    value: '1'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [386, 8]
+    rotation: 0
+    state: true
 - name: samp_rate
   id: variable
   parameters:
     comment: ''
-    value: 10*44100
+    value: '1000000'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [184, 12]
+    coordinate: [183, 12]
     rotation: 0
     state: enabled
-- name: analog_nbfm_rx_0
-  id: analog_nbfm_rx
-  parameters:
-    affinity: ''
-    alias: ''
-    audio_rate: '44100'
-    comment: ''
-    max_dev: 5e3
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    quad_rate: '44100'
-    tau: 75e-6
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [761, 217]
-    rotation: 0
-    state: disabled
-- name: analog_wfm_rcv_0
-  id: analog_wfm_rcv
-  parameters:
-    affinity: ''
-    alias: ''
-    audio_decimation: '10'
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    quad_rate: samp_rate
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [762, 327]
-    rotation: 0
-    state: true
-- name: audio_sink_0
+- name: audio_sink_0_0_0
   id: audio_sink
   parameters:
     affinity: ''
@@ -139,7 +103,41 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1229, 227]
+    coordinate: [1105, 245]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_mag_0
+  id: blocks_complex_to_mag
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [327, 227]
+    rotation: 0
+    state: enabled
+- name: dc_blocker_xx_0
+  id: dc_blocker_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    length: '512'
+    long_form: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: ff
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [731, 214]
     rotation: 0
     state: enabled
 - name: low_pass_filter_0
@@ -149,90 +147,32 @@ blocks:
     alias: ''
     beta: '6.76'
     comment: ''
-    cutoff_freq: fc_filtre
+    cutoff_freq: fcfiltre
     decim: '1'
     gain: '1'
     interp: '1'
     maxoutbuf: '0'
     minoutbuf: '0'
     samp_rate: samp_rate
-    type: fir_filter_ccf
-    width: fc_filtre/10
+    type: fir_filter_fff
+    width: 0.1*fcfiltre
     win: firdes.WIN_HAMMING
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [528, 143]
-    rotation: 0
-    state: true
-- name: qtgui_sink_x_0
-  id: qtgui_sink_x
-  parameters:
-    affinity: ''
-    alias: ''
-    bw: samp_rate
-    comment: ''
-    fc: center_freq_mod
-    fftsize: '1024'
-    gui_hint: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    name: '""'
-    plotconst: 'True'
-    plotfreq: 'True'
-    plottime: 'True'
-    plotwaterfall: 'True'
-    rate: '10'
-    showports: 'False'
-    showrf: 'False'
-    type: complex
-    wintype: firdes.WIN_BLACKMAN_hARRIS
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [600, 410]
+    coordinate: [514, 178]
     rotation: 0
     state: enabled
-- name: qtgui_sink_x_0_0
-  id: qtgui_sink_x
-  parameters:
-    affinity: ''
-    alias: ''
-    bw: samp_rate
-    comment: ''
-    fc: center_freq_mod
-    fftsize: '1024'
-    gui_hint: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    name: '""'
-    plotconst: 'True'
-    plotfreq: 'True'
-    plottime: 'True'
-    plotwaterfall: 'True'
-    rate: '10'
-    showports: 'False'
-    showrf: 'False'
-    type: complex
-    wintype: firdes.WIN_BLACKMAN_hARRIS
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [858, 33]
-    rotation: 0
-    state: enabled
-- name: rational_resampler_xxx_0
+- name: rational_resampler_xxx_0_0_0
   id: rational_resampler_xxx
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    decim: '2'
+    decim: samp_rate
     fbw: '0'
-    interp: '1'
+    interp: '44100'
     maxoutbuf: '0'
     minoutbuf: '0'
     taps: ''
@@ -241,9 +181,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1010, 213]
+    coordinate: [910, 190]
     rotation: 0
-    state: bypassed
+    state: enabled
 - name: uhd_usrp_source_0
   id: uhd_usrp_source
   parameters:
@@ -313,7 +253,7 @@ blocks:
     bw7: '0'
     bw8: '0'
     bw9: '0'
-    center_freq0: center_freq_mod
+    center_freq0: fc
     center_freq1: '0'
     center_freq10: '0'
     center_freq11: '0'
@@ -389,7 +329,7 @@ blocks:
     dc_offs_enb9: '""'
     dev_addr: '""'
     dev_args: '""'
-    gain0: '60'
+    gain0: gain
     gain1: '0'
     gain10: '0'
     gain11: '0'
@@ -612,19 +552,16 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [262, 337]
+    coordinate: [76, 176]
     rotation: 0
-    state: true
+    state: enabled
 
 connections:
-- [analog_nbfm_rx_0, '0', rational_resampler_xxx_0, '0']
-- [analog_wfm_rcv_0, '0', rational_resampler_xxx_0, '0']
-- [low_pass_filter_0, '0', analog_nbfm_rx_0, '0']
-- [low_pass_filter_0, '0', analog_wfm_rcv_0, '0']
-- [low_pass_filter_0, '0', qtgui_sink_x_0_0, '0']
-- [rational_resampler_xxx_0, '0', audio_sink_0, '0']
-- [uhd_usrp_source_0, '0', low_pass_filter_0, '0']
-- [uhd_usrp_source_0, '0', qtgui_sink_x_0, '0']
+- [blocks_complex_to_mag_0, '0', low_pass_filter_0, '0']
+- [dc_blocker_xx_0, '0', rational_resampler_xxx_0_0_0, '0']
+- [low_pass_filter_0, '0', dc_blocker_xx_0, '0']
+- [rational_resampler_xxx_0_0_0, '0', audio_sink_0_0_0, '0']
+- [uhd_usrp_source_0, '0', blocks_complex_to_mag_0, '0']
 
 metadata:
   file_format: 1
